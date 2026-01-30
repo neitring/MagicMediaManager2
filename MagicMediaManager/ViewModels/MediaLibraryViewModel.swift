@@ -63,6 +63,7 @@ final class MediaLibraryViewModel: ObservableObject {
         guard sources.contains(trimmed) == false else { return }
         sources.append(trimmed)
         sourcesByCategory[category] = sources
+        addItemForSource(trimmed, category: category)
     }
 
     func removeSource(at offsets: IndexSet, from category: MediaCategory) {
@@ -114,6 +115,16 @@ final class MediaLibraryViewModel: ObservableObject {
         if let data = try? JSONEncoder().encode(encoded) {
             UserDefaults.standard.set(data, forKey: sourcesKey)
         }
+    }
+
+    private func addItemForSource(_ source: String, category: MediaCategory) {
+        let normalizedLink = "source-\(category.rawValue.lowercased().replacingOccurrences(of: " ", with: "-"))-\(source.lowercased().replacingOccurrences(of: " ", with: "-"))"
+        let existingLinks = itemsByCategory[category]?.map(\.link) ?? []
+        guard existingLinks.contains(normalizedLink) == false else { return }
+        let newItem = MediaItem(title: "\(source) Update", subtitle: "New from \(source)", link: normalizedLink)
+        var items = itemsByCategory[category] ?? []
+        items.insert(newItem, at: 0)
+        itemsByCategory[category] = items
     }
 
     private static func sampleItems() -> [MediaCategory: [MediaItem]] {

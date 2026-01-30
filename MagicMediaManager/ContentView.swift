@@ -1,6 +1,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject private var viewModel: MediaLibraryViewModel
+
+    private var enabledCategories: [MediaCategory] {
+        MediaCategory.allCases.filter { viewModel.categoriesEnabled[$0, default: true] }
+    }
+
     var body: some View {
         TabView {
             NavigationStack {
@@ -10,7 +16,7 @@ struct ContentView: View {
                 Label("Favorites", systemImage: "star")
             }
 
-            ForEach(MediaCategory.allCases) { category in
+            ForEach(enabledCategories) { category in
                 NavigationStack {
                     CategoryListView(category: category)
                 }
