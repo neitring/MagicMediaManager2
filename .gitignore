@@ -1,0 +1,6 @@
+
+# Xcode user data
+xcuserdata/
+*.xcuserstate
+**/*.xcodeproj/project.xcworkspace/xcuserdata/
+**/*.xcodeproj/xcuserdata/
