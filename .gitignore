@@ -1,13 +1,5 @@
-
-# Xcode user data
-xcuserdata/
-*.xcuserstate
-**/*.xcodeproj/project.xcworkspace/xcuserdata/
-**/*.xcodeproj/xcuserdata/
-
-# Xcode user junk
-xcuserdata/
-*.xcuserstate
-**/*.xcodeproj/project.xcworkspace/xcuserdata/
-**/*.xcodeproj/xcuserdata/
 .DS_Store
+xcuserdata/
+*.xcuserstate
+**/*.xcodeproj/project.xcworkspace/xcuserdata/
+**/*.xcodeproj/xcuserdata/
