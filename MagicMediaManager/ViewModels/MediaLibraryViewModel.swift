@@ -1,5 +1,6 @@
 import Combine
 import Foundation
+import SwiftUI
 
 final class MediaLibraryViewModel: ObservableObject {
     @Published private(set) var itemsByCategory: [MediaCategory: [MediaItem]] = [:]
