@@ -1,8 +1,9 @@
+import Combine
 import Foundation
 
 final class MediaLibraryViewModel: ObservableObject {
     @Published private(set) var itemsByCategory: [MediaCategory: [MediaItem]] = [:]
-    @Published var favorites: Set<String> = [] {
+    @Published private(set) var favorites: Set<String> = [] {
         didSet { saveFavorites() }
     }
     @Published var categoriesEnabled: [MediaCategory: Bool] = [:] {
