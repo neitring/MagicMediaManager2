@@ -1,6 +1,8 @@
 import Combine
 import Foundation
+import SwiftUI
 
+@MainActor
 final class CategorySettingsStore: ObservableObject {
     @Published var enabledCategories: [MediaCategory: Bool]
 
