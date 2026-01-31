@@ -1,24 +1,41 @@
-//
-//  ContentView.swift
-//  MagicMediaManager
-//
-//  Created by Jay Neitring on 1/30/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject private var viewModel: MediaLibraryViewModel
+
+    private var enabledCategories: [MediaCategory] {
+        MediaCategory.allCases.filter { viewModel.categoriesEnabled[$0, default: true] }
+    }
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            NavigationStack {
+                FavoritesView()
+            }
+            .tabItem {
+                Label("Favorites", systemImage: "star")
+            }
+
+            ForEach(enabledCategories) { category in
+                NavigationStack {
+                    CategoryListView(category: category)
+                }
+                .tabItem {
+                    Label(category.rawValue, systemImage: category.systemImage)
+                }
+            }
+
+            NavigationStack {
+                ManageView()
+            }
+            .tabItem {
+                Label("Manage", systemImage: "slider.horizontal.3")
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(MediaLibraryViewModel())
 }

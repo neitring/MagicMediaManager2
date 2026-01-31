@@ -1,17 +1,15 @@
-//
-//  MagicMediaManagerApp.swift
-//  MagicMediaManager
-//
-//  Created by Jay Neitring on 1/30/26.
-//
-
 import SwiftUI
 
 @main
 struct MagicMediaManagerApp: App {
+    @StateObject private var viewModel = MediaLibraryViewModel()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(viewModel)
+                .tint(.pink)
+                .preferredColorScheme(.dark)
         }
     }
 }
